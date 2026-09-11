@@ -37,7 +37,95 @@ function RevealCard({ children, delay = 0, style = {} }) {
   return <div ref={ref} style={style}>{children}</div>;
 }
 
-export default function Home({ setPage }) {
+const homeTexts = {
+  fr: {
+    heroTag: 'Village d\'Ambohipisaka',
+    heroTitle1: 'Bienvenue dans',
+    heroTitle2: 'notre village',
+    heroText: 'Découvrez l\'histoire, les paysages, les quartiers et la culture d\'Ambohipisaka, au cœur de la région Bongolava.',
+    btnMore: 'Voir plus',
+    btnHistory: 'Notre histoire',
+    aboutLabel: 'À propos',
+    aboutTitle: 'Présentation du village',
+    introPresentation: {
+      title: 'Présentation',
+      text: 'Ambohipisaka est un village situé à l\'Est d\'Ampihoarana, il est ensemblé par de Fokontany Fihaonana avec Ankazotsifantatra. Autrefois, ce village est situé dans un lieu appelé Tanàna Haolo, et dans cette lieu, à ce moment-là, il y avait une maladie grave appelée peste et presque plus de personnes étaient mortes, donc il a été déplacé vers l\'Est. C\'est ainsi qu\'a été donné le nom de ce village appelé Ambohipisaka.',
+    },
+    introQuartiers: {
+      title: 'Quartiers',
+      text: 'Les quartiers principaux sont Amboniandrefana et Andafiavaratra, Tanambe, Patrage Ouest, Patrage Est, Patrage Sud. Chaque quartier a sa propre histoire, ses coutumes et ses habitants chaleureux.',
+    },
+    explorerLabel: 'Explorer',
+    exploreTitle: 'Découvrez Ambohipisaka',
+    featureHistoire: 'Histoire',
+    featurePaysage: 'Paysage',
+    featureCulture: 'Culture',
+    featureTextHistoire: 'Le village s\'est développé autour de l\'agriculture et du partage. Les ancêtres ont construit le village en respectant la nature et les traditions locales.',
+    featureTextPaysage: 'Les rizières, les sentiers et les maisons traditionnelles créent un paysage vivant et paisible que l\'on découvre à chaque visite.',
+    featureTextCulture: 'La culture du village est faite de fêtes de quartier, de cuisine locale et de savoir-faire artisanal transmis de génération en génération.',
+    featureMore: 'Lire la suite →',
+    galleryLabel: 'Galerie',
+    galleryTitle: 'Images du village',
+    galleryButton: 'Voir la galerie complète',
+    contactLabel: 'Contact',
+    contactTitle: 'Nous écrire',
+    contactText: 'Pour toute information sur le village, utilisez le formulaire ci-dessous.',
+    formName: 'Nom',
+    formNamePlaceholder: 'Votre nom',
+    formEmail: 'Email',
+    formEmailPlaceholder: 'Votre email',
+    formSubject: 'Sujet',
+    formSubjectPlaceholder: 'Pourquoi nous contacter ?',
+    formMessage: 'Message',
+    formMessagePlaceholder: 'Votre message',
+    formSubmit: 'Envoyer le message',
+  },
+  mg: {
+    heroTag: 'Vohitra Ambohipisaka',
+    heroTitle1: 'Tongasoa eto',
+    heroTitle2: 'ny vohitray',
+    heroText: 'Hita eto amin\'ny tantara, ny tontolo iainana, ny faritra ary ny kolontsain\'ny Ambohipisaka, any afovoany amin\'ny faritra Bongolava.',
+    btnMore: 'Hijery bebe kokoa',
+    btnHistory: 'Tantara',
+    aboutLabel: 'Momba',
+    aboutTitle: 'Fampahafantarana ny vohitra',
+    introPresentation: {
+      title: 'Fampahafantarana',
+      text: 'Ambohipisaka dia vohitra iray mipetraka atsinanan\'i Ampihoarana, ary voaforon-kilasy ny Fokontany Fihaonana miaraka amin\'i Ankazotsifantatra. Talohan\'io, io vohitra io dia nipetraka tao amin\'ny toerana iray antsoina hoe Tanàna Haolo, ary tamin\'io toerana io no nisy aretina grave iray antsoina hoe peste, ary saika ny olona rehetra no maty. Noho izany, nifindra niakatra atsinanana izy io, ary izany no namorona ny anaran\'io vohitra io hoe Ambohipisaka.',
+    },
+    introQuartiers: {
+      title: 'Faritra',
+      text: 'Ny faritra lehibe dia Amboniandrefana sy Andafiavaratra, Tanambe, Faritra Andrefana, Faritra Atsinanana, Faritra Atsimo. Ny faritra tsirairay manana tantara, fomban-drazana, ary mponina mafana fo.',
+    },
+    explorerLabel: 'Hikaroka',
+    exploreTitle: 'Hita eto Ambohipisaka',
+    featureHistoire: 'Tantara',
+    featurePaysage: 'Tendrombohitra',
+    featureCulture: 'Kolontsaina',
+    featureTextHistoire: 'Ny vohitra dia nivoatra tamin\'ny fambolena sy ny fifampizarana. Ny razana no nanorina ny vohitra tamin\'ny fanajana ny natiora sy ny fomban-drazana.',
+    featureTextPaysage: 'Ny tanim-bary, ny lalana ary ny trano nentim-paharazana dia mamorona tontolo iainana milamina sy mangina izay hitanao isaky ny fitsidihana.',
+    featureTextCulture: 'Ny kolontsain\'ny vohitra dia manisy fety, sakafo eo an-toerana ary fahaizana manokana nolovaina hatramin\'ny taranaka.',
+    featureMore: 'Hamaky bebe kokoa →',
+    galleryLabel: 'Sary',
+    galleryTitle: 'Sary ny vohitra',
+    galleryButton: 'Jereo ny sarin\'ny vohitra',
+    contactLabel: 'Fifandraisana',
+    contactTitle: 'Soraty anay',
+    contactText: 'Raha mila fampahalalana momba ny vohitra, ampiasao ny taratasy etsy ambany.',
+    formName: 'Anarana',
+    formNamePlaceholder: 'Anaran\'ny olona',
+    formEmail: 'Mailaka',
+    formEmailPlaceholder: 'Mailakao',
+    formSubject: 'Lohahevitra',
+    formSubjectPlaceholder: 'Inona no antony hifandraisana?',
+    formMessage: 'Hafatra',
+    formMessagePlaceholder: 'Ny hafatrao',
+    formSubmit: 'Alefaso',
+  },
+};
+
+export default function Home({ setPage, language = 'fr' }) {
+  const t = homeTexts[language] || homeTexts.fr;
   return (
     <div style={{ paddingTop: 64 }}>
       {/* HERO */}
@@ -73,16 +161,16 @@ export default function Home({ setPage }) {
               fontSize: '0.8rem', letterSpacing: 2, textTransform: 'uppercase', color: '#ffb56b',
             }}
           >
-            Village d'Ambohipisaka
+            {t.heroTag}
           </motion.span>
 
           <motion.h1
             initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.15 }}
             style={{ fontFamily: 'Playfair Display', fontSize: 'clamp(2.6rem, 5.5vw, 5rem)', fontWeight: 900, lineHeight: 1.1, color: '#fff', marginBottom: '1.5rem' }}
           >
-            Bienvenue dans<br />
+            {t.heroTitle1}<br />
             <span style={{ background: 'linear-gradient(90deg, #d2691e, #ff8c42)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-              notre village
+              {t.heroTitle2}
             </span>
           </motion.h1>
 
@@ -90,8 +178,7 @@ export default function Home({ setPage }) {
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.3 }}
             style={{ fontSize: '1.1rem', color: '#d0d8f5', lineHeight: 1.85, maxWidth: 660, margin: '0 auto 2.5rem' }}
           >
-            Découvrez l'histoire, les paysages, les quartiers et la culture d'Ambohipisaka,
-            au cœur de la région Bongolava.
+            {t.heroText}
           </motion.p>
 
           <motion.div
@@ -99,10 +186,10 @@ export default function Home({ setPage }) {
             style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}
           >
             <button onClick={() => setPage('/voirplus')} style={btnStyle}>
-              Voir plus
+              {t.btnMore}
             </button>
             <button onClick={() => setPage('/historique')} style={btnOutlineStyle}>
-              Notre histoire
+              {t.btnHistory}
             </button>
           </motion.div>
         </div>
@@ -117,14 +204,14 @@ export default function Home({ setPage }) {
       {/* INTRO CARDS */}
       <section style={{ maxWidth: 1100, margin: '4rem auto', padding: '0 1.5rem' }}>
         <RevealCard style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-          <span style={{ color: '#d2691e', fontSize: '0.8rem', letterSpacing: 2, textTransform: 'uppercase' }}>À propos</span>
-          <h2 style={{ fontFamily: 'Playfair Display', fontSize: 'clamp(1.8rem,3vw,2.6rem)', marginTop: '0.5rem', color: '#fff' }}>Présentation du village</h2>
+          <span style={{ color: '#d2691e', fontSize: '0.8rem', letterSpacing: 2, textTransform: 'uppercase' }}>{t.aboutLabel}</span>
+          <h2 style={{ fontFamily: 'Playfair Display', fontSize: 'clamp(1.8rem,3vw,2.6rem)', marginTop: '0.5rem', color: '#fff' }}>{t.aboutTitle}</h2>
         </RevealCard>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px,1fr))', gap: '1.5rem' }}>
           {[
-            { title: 'Présentation', text: 'Ambohipisaka est un village authentique de Bongolava. Il est connu pour sa nature riche, ses collines verdoyantes et sa communauté solidaire.', delay: 0 },
-            { title: 'Quartiers', text: 'Les quartiers principaux sont Amboniandrefana et Andafiavaratra. Chaque quartier a sa propre histoire, ses coutumes et ses habitants chaleureux.', delay: 0.1 },
+            { title: t.introPresentation.title, text: t.introPresentation.text, delay: 0 },
+            { title: t.introQuartiers.title, text: t.introQuartiers.text, delay: 0.1 },
           ].map(card => (
             <RevealCard key={card.title} delay={card.delay} style={cardStyle}>
               <h3 style={{ fontFamily: 'Playfair Display', fontSize: '1.3rem', color: '#fff', marginBottom: '0.75rem' }}>{card.title}</h3>
@@ -138,14 +225,14 @@ export default function Home({ setPage }) {
       <section style={{ background: 'rgba(255,255,255,0.02)', padding: '4rem 1.5rem' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <RevealCard style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-            <span style={{ color: '#d2691e', fontSize: '0.8rem', letterSpacing: 2, textTransform: 'uppercase' }}>Explorer</span>
-            <h2 style={{ fontFamily: 'Playfair Display', fontSize: 'clamp(1.8rem,3vw,2.6rem)', marginTop: '0.5rem', color: '#fff' }}>Découvrez Ambohipisaka</h2>
+            <span style={{ color: '#d2691e', fontSize: '0.8rem', letterSpacing: 2, textTransform: 'uppercase' }}>{t.explorerLabel}</span>
+            <h2 style={{ fontFamily: 'Playfair Display', fontSize: 'clamp(1.8rem,3vw,2.6rem)', marginTop: '0.5rem', color: '#fff' }}>{t.exploreTitle}</h2>
           </RevealCard>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px,1fr))', gap: '1.5rem' }}>
             {[
-              { icon: HistoryIcon, title: 'Histoire', text: 'Le village s\'est développé autour de l\'agriculture et du partage. Les ancêtres ont construit le village en respectant la nature et les traditions locales.', page: '/historique', delay: 0 },
-              { icon: LandscapeIcon, title: 'Paysage', text: 'Les rizières, les sentiers et les maisons traditionnelles créent un paysage vivant et paisible que l\'on découvre à chaque visite.', page: '/paysage', delay: 0.1 },
-              { icon: CultureIcon, title: 'Culture', text: 'La culture du village est faite de fêtes de quartier, de cuisine locale et de savoir-faire artisanal transmis de génération en génération.', page: '/voirplus', delay: 0.2 },
+              { icon: HistoryIcon, title: t.featureHistoire, text: t.featureTextHistoire, page: '/historique', delay: 0 },
+              { icon: LandscapeIcon, title: t.featurePaysage, text: t.featureTextPaysage, page: '/paysage', delay: 0.1 },
+              { icon: CultureIcon, title: t.featureCulture, text: t.featureTextCulture, page: '/voirplus', delay: 0.2 },
             ].map(f => (
               <RevealCard key={f.title} delay={f.delay} style={{ ...cardStyle, cursor: 'pointer', position: 'relative', overflow: 'hidden' }}
               >
@@ -153,7 +240,7 @@ export default function Home({ setPage }) {
                   <div style={{ fontSize: 40, marginBottom: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><f.icon /></div>
                   <h3 style={{ fontFamily: 'Playfair Display', fontSize: '1.3rem', color: '#fff', marginBottom: '0.75rem' }}>{f.title}</h3>
                   <p style={{ color: '#9aa3c4', lineHeight: 1.75, fontSize: '0.95rem', marginBottom: '1.25rem' }}>{f.text}</p>
-                  <span style={{ color: '#d2691e', fontSize: '0.88rem', fontWeight: 600 }}>Lire la suite →</span>
+                  <span style={{ color: '#d2691e', fontSize: '0.88rem', fontWeight: 600 }}>{t.featureMore}</span>
                 </div>
               </RevealCard>
             ))}
@@ -164,8 +251,8 @@ export default function Home({ setPage }) {
       {/* GALLERY PREVIEW */}
       <section style={{ maxWidth: 1100, margin: '4rem auto', padding: '0 1.5rem' }}>
         <RevealCard style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-          <span style={{ color: '#d2691e', fontSize: '0.8rem', letterSpacing: 2, textTransform: 'uppercase' }}>Galerie</span>
-          <h2 style={{ fontFamily: 'Playfair Display', fontSize: 'clamp(1.8rem,3vw,2.6rem)', marginTop: '0.5rem', color: '#fff' }}>Images du village</h2>
+          <span style={{ color: '#d2691e', fontSize: '0.8rem', letterSpacing: 2, textTransform: 'uppercase' }}>{t.galleryLabel}</span>
+          <h2 style={{ fontFamily: 'Playfair Display', fontSize: 'clamp(1.8rem,3vw,2.6rem)', marginTop: '0.5rem', color: '#fff' }}>{t.galleryTitle}</h2>
         </RevealCard>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px,1fr))', gap: '1rem', marginBottom: '1.5rem' }}>
           {[101,102,103,104].map((n, i) => (
@@ -182,7 +269,7 @@ export default function Home({ setPage }) {
         </div>
         <div style={{ textAlign: 'center' }}>
           <button onClick={() => setPage('/photos')} style={btnOutlineStyle}>
-            Voir la galerie complète
+            {t.galleryButton}
           </button>
         </div>
       </section>
@@ -191,12 +278,12 @@ export default function Home({ setPage }) {
       <section style={{ background: 'rgba(255,255,255,0.02)', padding: '4rem 1.5rem' }} id="contact">
         <div style={{ maxWidth: 720, margin: '0 auto' }}>
           <RevealCard style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-            <span style={{ color: '#d2691e', fontSize: '0.8rem', letterSpacing: 2, textTransform: 'uppercase' }}>Contact</span>
-            <h2 style={{ fontFamily: 'Playfair Display', fontSize: 'clamp(1.8rem,3vw,2.6rem)', marginTop: '0.5rem', color: '#fff' }}>Nous écrire</h2>
-            <p style={{ color: '#8a95b8', marginTop: '0.75rem' }}>Pour toute information sur le village, utilisez le formulaire ci-dessous.</p>
+            <span style={{ color: '#d2691e', fontSize: '0.8rem', letterSpacing: 2, textTransform: 'uppercase' }}>{t.contactLabel}</span>
+            <h2 style={{ fontFamily: 'Playfair Display', fontSize: 'clamp(1.8rem,3vw,2.6rem)', marginTop: '0.5rem', color: '#fff' }}>{t.contactTitle}</h2>
+            <p style={{ color: '#8a95b8', marginTop: '0.75rem' }}>{t.contactText}</p>
           </RevealCard>
           <RevealCard style={cardStyle} delay={0.1}>
-            <ContactForm />
+            <ContactForm language={language} />
           </RevealCard>
         </div>
       </section>
@@ -236,13 +323,14 @@ function CultureIcon() {
   );
 }
 
-function ContactForm() {
+function ContactForm({ language = 'fr' }) {
+  const t = homeTexts[language] || homeTexts.fr;
   return (
     <form onSubmit={e => e.preventDefault()} style={{ display: 'grid', gap: '1.2rem' }}>
       {[
-        { id: 'name', label: 'Nom', type: 'text', placeholder: 'Votre nom' },
-        { id: 'email', label: 'Email', type: 'email', placeholder: 'Votre email' },
-        { id: 'subject', label: 'Sujet', type: 'text', placeholder: 'Pourquoi nous contacter ?' },
+        { id: 'name', label: t.formName, type: 'text', placeholder: t.formNamePlaceholder },
+        { id: 'email', label: t.formEmail, type: 'email', placeholder: t.formEmailPlaceholder },
+        { id: 'subject', label: t.formSubject, type: 'text', placeholder: t.formSubjectPlaceholder },
       ].map(f => (
         <div key={f.id}>
           <label style={{ display: 'block', marginBottom: 6, fontWeight: 600, fontSize: '0.9rem', color: '#c5cce8' }}>{f.label}</label>
@@ -255,15 +343,15 @@ function ContactForm() {
         </div>
       ))}
       <div>
-        <label style={{ display: 'block', marginBottom: 6, fontWeight: 600, fontSize: '0.9rem', color: '#c5cce8' }}>Message</label>
+        <label style={{ display: 'block', marginBottom: 6, fontWeight: 600, fontSize: '0.9rem', color: '#c5cce8' }}>{t.formMessage}</label>
         <textarea
-          rows={5} placeholder="Votre message"
+          rows={5} placeholder={t.formMessagePlaceholder}
           style={{ ...inputStyle, resize: 'vertical' }}
           onFocus={e => { e.target.style.borderColor = '#d2691e'; e.target.style.boxShadow = '0 0 0 3px rgba(210,105,30,0.15)'; }}
           onBlur={e => { e.target.style.borderColor = 'rgba(255,255,255,0.1)'; e.target.style.boxShadow = 'none'; }}
         />
       </div>
-      <button type="submit" style={btnStyle}>Envoyer le message</button>
+      <button type="submit" style={btnStyle}>{t.formSubmit}</button>
     </form>
   );
 }
