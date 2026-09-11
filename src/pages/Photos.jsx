@@ -1,13 +1,19 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import image1 from '../assets/image1.jpeg';
+import image2 from '../assets/image2.jpeg';
+import image3 from '../assets/image3.jpeg';
+import image4 from '../assets/image4.jpeg';
+import image5 from '../assets/image5.jpeg';
+import image6 from '../assets/image6.jpeg';
 
 const photos = [
-  { id: 201, caption: 'Maison locale d\'Ambohipisaka' },
-  { id: 202, caption: 'Paysage naturel et végétation' },
-  { id: 203, caption: 'La belle vallée qui entoure le village' },
-  { id: 204, caption: 'Vue d\'ensemble du village et ses bâtiments' },
-  { id: 205, caption: 'Les champs de riz qui nourrissent la communauté' },
-  { id: 206, caption: 'La forêt qui borde le village et ses ressources' },
+  { id: 201, caption: 'Maison locale d\'Ambohipisaka', image: image1 },
+  { id: 202, caption: 'Paysage naturel et végétation', image: image2 },
+  { id: 203, caption: 'La belle vallée qui entoure le village', image: image3 },
+  { id: 204, caption: 'Vue d\'ensemble du village et ses bâtiments', image: image4 },
+  { id: 205, caption: 'Les champs de riz qui nourrissent la communauté', image: image5 },
+  { id: 206, caption: 'La forêt qui borde le village et ses ressources', image: image6 },
   { id: 207, caption: 'La rivière qui traverse et apporte la vie' },
   { id: 208, caption: 'Le marché où les habitants se retrouvent' },
   { id: 209, caption: 'Célébrations et moments de joie communautaire' },
@@ -53,7 +59,7 @@ export default function Photos() {
             >
               <div style={{ overflow: 'hidden' }}>
                 <img
-                  src={`https://picsum.photos/400/300?random=${p.id}`}
+                  src={p.image || `https://picsum.photos/400/300?random=${p.id}`}
                   alt={p.caption}
                   style={{ width: '100%', height: 220, objectFit: 'cover', display: 'block', transition: 'transform 0.4s' }}
                   onMouseEnter={e => e.target.style.transform = 'scale(1.06)'}
@@ -84,7 +90,7 @@ export default function Photos() {
             onClick={e => e.stopPropagation()}
             style={{ maxWidth: 800, width: '100%', borderRadius: 20, overflow: 'hidden', background: '#0a0c1e' }}
           >
-            <img src={`https://picsum.photos/800/500?random=${selected.id}`} alt={selected.caption} style={{ width: '100%', display: 'block' }} />
+            <img src={selected.image || `https://picsum.photos/800/500?random=${selected.id}`} alt={selected.caption} style={{ width: '100%', display: 'block' }} />
             <div style={{ padding: '1rem 1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <p style={{ color: '#c5cce8', margin: 0 }}>{selected.caption}</p>
               <button onClick={() => setSelected(null)} style={{ background: 'none', border: 'none', color: '#d2691e', cursor: 'pointer', fontSize: '1.3rem', fontWeight: 700 }}>✕</button>

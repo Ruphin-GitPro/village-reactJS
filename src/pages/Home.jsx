@@ -143,14 +143,14 @@ export default function Home({ setPage }) {
           </RevealCard>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px,1fr))', gap: '1.5rem' }}>
             {[
-              { emoji: '🏛️', title: 'Histoire', text: 'Le village s\'est développé autour de l\'agriculture et du partage. Les ancêtres ont construit le village en respectant la nature et les traditions locales.', page: '/historique', delay: 0 },
-              { emoji: '🌿', title: 'Paysage', text: 'Les rizières, les sentiers et les maisons traditionnelles créent un paysage vivant et paisible que l\'on découvre à chaque visite.', page: '/paysage', delay: 0.1 },
-              { emoji: '🎉', title: 'Culture', text: 'La culture du village est faite de fêtes de quartier, de cuisine locale et de savoir-faire artisanal transmis de génération en génération.', page: '/voirplus', delay: 0.2 },
+              { icon: HistoryIcon, title: 'Histoire', text: 'Le village s\'est développé autour de l\'agriculture et du partage. Les ancêtres ont construit le village en respectant la nature et les traditions locales.', page: '/historique', delay: 0 },
+              { icon: LandscapeIcon, title: 'Paysage', text: 'Les rizières, les sentiers et les maisons traditionnelles créent un paysage vivant et paisible que l\'on découvre à chaque visite.', page: '/paysage', delay: 0.1 },
+              { icon: CultureIcon, title: 'Culture', text: 'La culture du village est faite de fêtes de quartier, de cuisine locale et de savoir-faire artisanal transmis de génération en génération.', page: '/voirplus', delay: 0.2 },
             ].map(f => (
               <RevealCard key={f.title} delay={f.delay} style={{ ...cardStyle, cursor: 'pointer', position: 'relative', overflow: 'hidden' }}
               >
                 <div onClick={() => setPage(f.page)}>
-                  <div style={{ fontSize: 40, marginBottom: '1rem' }}>{f.emoji}</div>
+                  <div style={{ fontSize: 40, marginBottom: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><f.icon /></div>
                   <h3 style={{ fontFamily: 'Playfair Display', fontSize: '1.3rem', color: '#fff', marginBottom: '0.75rem' }}>{f.title}</h3>
                   <p style={{ color: '#9aa3c4', lineHeight: 1.75, fontSize: '0.95rem', marginBottom: '1.25rem' }}>{f.text}</p>
                   <span style={{ color: '#d2691e', fontSize: '0.88rem', fontWeight: 600 }}>Lire la suite →</span>
@@ -201,6 +201,38 @@ export default function Home({ setPage }) {
         </div>
       </section>
     </div>
+  );
+}
+
+function HistoryIcon() {
+  return (
+    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Histoire">
+      <path d="M4 20h16" stroke="#d2691e" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M5 20V4l7-3 7 3v16" stroke="#f9b46c" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M8 7h8M8 11h8M8 15h6" stroke="#d2691e" strokeWidth="1.8" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function LandscapeIcon() {
+  return (
+    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Paysage">
+      <path d="M3 18l5-7 4 4 4-6 5 9" stroke="#d2691e" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M4 20h16" stroke="#f9b46c" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M6 6c2 1 3 3 3 5" stroke="#d2691e" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M14 5c2 2 2 4 0 6" stroke="#d2691e" strokeWidth="1.8" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function CultureIcon() {
+  return (
+    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Culture">
+      <path d="M12 3a8 8 0 1 0 8 8" stroke="#d2691e" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M12 8a4 4 0 1 0 4 4" stroke="#f9b46c" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M7 16c2 2 4 2 5 0 1.2-2 3-2 4.5 0" stroke="#d2691e" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M12 3v6" stroke="#d2691e" strokeWidth="1.8" strokeLinecap="round" />
+    </svg>
   );
 }
 
