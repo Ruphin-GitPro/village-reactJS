@@ -3,14 +3,33 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 
 const links = [
-  { to: '/', label: 'Accueil' },
-  { to: '/historique', label: 'Historique' },
-  { to: '/photos', label: 'Photos' },
-  { to: '/paysage', label: 'Paysage' },
-  { to: '/voirplus', label: 'Voir plus' },
+  { to: '/', labelKey: 'accueil' },
+  { to: '/historique', labelKey: 'historique' },
+  { to: '/photos', labelKey: 'photos' },
+  { to: '/paysage', labelKey: 'paysage' },
+  { to: '/voirplus', labelKey: 'voirplus' },
 ];
 
-export default function Navbar({ active, setPage }) {
+const navLabels = {
+  fr: {
+    accueil: 'Accueil',
+    historique: 'Historique',
+    photos: 'Photos',
+    paysage: 'Paysage',
+    voirplus: 'Voir plus',
+    langue: 'Langue',
+  },
+  mg: {
+    accueil: 'Fandraisana',
+    historique: 'Tantara',
+    photos: 'Sary',
+    paysage: 'Tendrombohitra',
+    voirplus: 'Hijery bebe kokoa',
+    langue: 'Fiteny',
+  },
+};
+
+export default function Navbar({ active, setPage, language, setLanguage }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -51,7 +70,7 @@ export default function Navbar({ active, setPage }) {
         </button>
 
         {/* Desktop links */}
-        <div style={{ display: 'flex', gap: '0.25rem' }} className="nav-desktop">
+        <div style={{ display: 'flex', gap: '0.25rem', alignItems: 'center' }} className="nav-desktop">
           {links.map(link => (
             <button
               key={link.to}
@@ -72,7 +91,7 @@ export default function Navbar({ active, setPage }) {
               onMouseEnter={e => { if (active !== link.to) e.currentTarget.style.color = '#fff'; }}
               onMouseLeave={e => { if (active !== link.to) e.currentTarget.style.color = '#c5cce8'; }}
             >
-              {link.label}
+              {navLabels[language][link.labelKey]}
               {active === link.to && (
                 <motion.div layoutId="nav-underline" style={{
                   position: 'absolute', bottom: 4, left: '50%', transform: 'translateX(-50%)',
@@ -81,6 +100,12 @@ export default function Navbar({ active, setPage }) {
               )}
             </button>
           ))}
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginLeft: '0.8rem', paddingLeft: '0.8rem', borderLeft: '1px solid rgba(255,255,255,0.1)' }}>
+            <span style={{ color: '#c5cce8', fontSize: '0.8rem', fontFamily: 'DM Sans' }}>{navLabels[language].langue}</span>
+            <button onClick={() => setLanguage('fr')} style={{ background: language === 'fr' ? '#d2691e' : 'transparent', border: '1px solid #d2691e', borderRadius: 999, color: '#fff', padding: '0.2rem 0.55rem', cursor: 'pointer', fontSize: '0.75rem' }}>FR</button>
+            <button onClick={() => setLanguage('mg')} style={{ background: language === 'mg' ? '#d2691e' : 'transparent', border: '1px solid #d2691e', borderRadius: 999, color: '#fff', padding: '0.2rem 0.55rem', cursor: 'pointer', fontSize: '0.75rem' }}>MG</button>
+          </div>
         </div>
 
         {/* Mobile hamburger */}
@@ -117,9 +142,14 @@ export default function Navbar({ active, setPage }) {
                     fontWeight: active === link.to ? 600 : 400,
                   }}
                 >
-                  {link.label}
+                  {navLabels[language][link.labelKey]}
                 </button>
               ))}
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '0.75rem 1rem', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+                <span style={{ color: '#c5cce8', fontSize: '0.85rem' }}>{navLabels[language].langue}</span>
+                <button onClick={() => { setLanguage('fr'); setOpen(false); }} style={{ background: language === 'fr' ? '#d2691e' : 'transparent', border: '1px solid #d2691e', borderRadius: 999, color: '#fff', padding: '0.3rem 0.65rem', cursor: 'pointer' }}>FR</button>
+                <button onClick={() => { setLanguage('mg'); setOpen(false); }} style={{ background: language === 'mg' ? '#d2691e' : 'transparent', border: '1px solid #d2691e', borderRadius: 999, color: '#fff', padding: '0.3rem 0.65rem', cursor: 'pointer' }}>MG</button>
+              </div>
             </div>
           </motion.div>
         )}

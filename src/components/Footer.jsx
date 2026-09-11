@@ -27,14 +27,47 @@ const socials = [
 ];
 
 const footerLinks = [
-  { label: 'Accueil', page: '/' },
-  { label: 'Historique', page: '/historique' },
-  { label: 'Photos', page: '/photos' },
-  { label: 'Paysage', page: '/paysage' },
-  { label: 'Voir plus', page: '/voirplus' },
+  { labelKey: 'accueil', page: '/' },
+  { labelKey: 'historique', page: '/historique' },
+  { labelKey: 'photos', page: '/photos' },
+  { labelKey: 'paysage', page: '/paysage' },
+  { labelKey: 'voirplus', page: '/voirplus' },
 ];
 
-export default function Footer({ setPage }) {
+const footerLabels = {
+  fr: {
+    accueil: 'Accueil',
+    historique: 'Historique',
+    photos: 'Photos',
+    paysage: 'Paysage',
+    voirplus: 'Voir plus',
+    navigation: 'Navigation',
+    contact: 'Contact',
+    reseaux: 'Réseaux sociaux',
+    description: 'Village authentique de Bongolava, Madagascar. Nature, histoire et communauté.',
+    region: 'Région Bongolava, Madagascar',
+    bottom: 'Bongolava · Madagascar 🇲🇬',
+    langage: 'Langue',
+  },
+  mg: {
+    accueil: 'Fandraisana',
+    historique: 'Tantara',
+    photos: 'Sary',
+    paysage: 'Tendrombohitra',
+    voirplus: 'Hijery bebe kokoa',
+    navigation: 'Lisitry ny tranonkala',
+    contact: 'Fifandraisana',
+    reseaux: 'Tambajotra sosialy',
+    description: 'Tanàna tena marina any Bongolava, Madagasikara. Natiora, tantara ary fiaraha-monina.',
+    region: 'Faritra Bongolava, Madagasikara',
+    bottom: 'Bongolava · Madagasikara 🇲🇬',
+    langage: 'Fiteny',
+  },
+};
+
+export default function Footer({ setPage, language = 'fr', setLanguage }) {
+  const labels = footerLabels[language];
+
   return (
     <footer style={{
       background: 'linear-gradient(180deg, #070920 0%, #03040d 100%)',
@@ -67,13 +100,13 @@ export default function Footer({ setPage }) {
               </span>
             </div>
             <p style={{ color: '#8a95b8', fontSize: '0.88rem', lineHeight: 1.7, maxWidth: 240 }}>
-              Village authentique de Bongolava, Madagascar. Nature, histoire et communauté.
+              {labels.description}
             </p>
           </div>
 
           {/* Navigation */}
           <div>
-            <h4 style={{ fontFamily: 'Playfair Display', fontSize: '0.95rem', color: '#fff', marginBottom: '1rem', letterSpacing: 1, textTransform: 'uppercase', opacity: 0.7 }}>Navigation</h4>
+            <h4 style={{ fontFamily: 'Playfair Display', fontSize: '0.95rem', color: '#fff', marginBottom: '1rem', letterSpacing: 1, textTransform: 'uppercase', opacity: 0.7 }}>{labels.navigation}</h4>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 8 }}>
               {footerLinks.map(link => (
                 <li key={link.page}>
@@ -88,7 +121,7 @@ export default function Footer({ setPage }) {
                     onMouseEnter={e => e.currentTarget.style.color = '#d2691e'}
                     onMouseLeave={e => e.currentTarget.style.color = '#8a95b8'}
                   >
-                    → {link.label}
+                    → {labels[link.labelKey]}
                   </button>
                 </li>
               ))}
@@ -97,16 +130,16 @@ export default function Footer({ setPage }) {
 
           {/* Contact */}
           <div>
-            <h4 style={{ fontFamily: 'Playfair Display', fontSize: '0.95rem', color: '#fff', marginBottom: '1rem', letterSpacing: 1, textTransform: 'uppercase', opacity: 0.7 }}>Contact</h4>
+            <h4 style={{ fontFamily: 'Playfair Display', fontSize: '0.95rem', color: '#fff', marginBottom: '1rem', letterSpacing: 1, textTransform: 'uppercase', opacity: 0.7 }}>{labels.contact}</h4>
             <p style={{ color: '#8a95b8', fontSize: '0.88rem', lineHeight: 1.7 }}>
               contact@ambohipisaka.mg<br />
-              Région Bongolava, Madagascar
+              {labels.region}
             </p>
           </div>
 
           {/* Social */}
           <div>
-            <h4 style={{ fontFamily: 'Playfair Display', fontSize: '0.95rem', color: '#fff', marginBottom: '1rem', letterSpacing: 1, textTransform: 'uppercase', opacity: 0.7 }}>Réseaux sociaux</h4>
+            <h4 style={{ fontFamily: 'Playfair Display', fontSize: '0.95rem', color: '#fff', marginBottom: '1rem', letterSpacing: 1, textTransform: 'uppercase', opacity: 0.7 }}>{labels.reseaux}</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
               {socials.map(s => (
                 <motion.a
@@ -144,7 +177,7 @@ export default function Footer({ setPage }) {
             © 2026 Village d'Ambohipisaka — Développé par <span style={{ color: '#d2691e' }}>RATAHINJANAHARY Ruphin Henri</span>
           </p>
           <p style={{ color: '#545d7a', fontSize: '0.82rem' }}>
-            Bongolava · Madagascar 🇲🇬
+            {labels.bottom}
           </p>
         </div>
       </div>

@@ -25,6 +25,7 @@ function PageWrapper({ children }) {
 
 export default function App() {
   const [page, setPage] = useState('/');
+  const [language, setLanguage] = useState('fr');
 
   const handleSetPage = (p) => {
     setPage(p);
@@ -33,22 +34,22 @@ export default function App() {
 
   const renderPage = () => {
     switch (page) {
-      case '/': return <PageWrapper key="home"><Home setPage={handleSetPage} /></PageWrapper>;
+      case '/': return <PageWrapper key="home"><Home setPage={handleSetPage} language={language} /></PageWrapper>;
       case '/historique': return <PageWrapper key="hist"><Historique /></PageWrapper>;
       case '/photos': return <PageWrapper key="photos"><Photos /></PageWrapper>;
       case '/paysage': return <PageWrapper key="paysage"><Paysage /></PageWrapper>;
       case '/voirplus': return <PageWrapper key="voirplus"><VoirPlus /></PageWrapper>;
-      default: return <PageWrapper key="home2"><Home setPage={handleSetPage} /></PageWrapper>;
+      default: return <PageWrapper key="home2"><Home setPage={handleSetPage} language={language} /></PageWrapper>;
     }
   };
 
   return (
     <>
-      <Navbar active={page} setPage={handleSetPage} />
+      <Navbar active={page} setPage={handleSetPage} language={language} setLanguage={setLanguage} />
       <AnimatePresence mode="wait">
         {renderPage()}
       </AnimatePresence>
-      <Footer setPage={handleSetPage} />
+      <Footer setPage={handleSetPage} language={language} setLanguage={setLanguage} />
     </>
   );
 }
