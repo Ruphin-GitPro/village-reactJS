@@ -35,10 +35,10 @@ export default function App() {
   const renderPage = () => {
     switch (page) {
       case '/': return <PageWrapper key="home"><Home setPage={handleSetPage} language={language} /></PageWrapper>;
-      case '/historique': return <PageWrapper key="hist"><Historique /></PageWrapper>;
-      case '/photos': return <PageWrapper key="photos"><Photos /></PageWrapper>;
-      case '/paysage': return <PageWrapper key="paysage"><Paysage /></PageWrapper>;
-      case '/voirplus': return <PageWrapper key="voirplus"><VoirPlus /></PageWrapper>;
+      case '/historique': return <PageWrapper key="hist"><Historique language={language} /></PageWrapper>;
+      case '/photos': return <PageWrapper key="photos"><Photos language={language} /></PageWrapper>;
+      case '/paysage': return <PageWrapper key="paysage"><Paysage language={language} /></PageWrapper>;
+      case '/voirplus': return <PageWrapper key="voirplus"><VoirPlus language={language} /></PageWrapper>;
       default: return <PageWrapper key="home2"><Home setPage={handleSetPage} language={language} /></PageWrapper>;
     }
   };
